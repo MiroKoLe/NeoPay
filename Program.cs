@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using NeoPay.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<NeoPayContext>();
+builder.Services.AddDbContext<NeoPayContext>(options => {
+    options.UseSqlServer("Data Source = MKOLEV\\SQLEXPRESS; Initial Catalog = NeoPay; Integrated Security = True");
+    });
 
 var app = builder.Build();
 
